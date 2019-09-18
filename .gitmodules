@@ -1,0 +1,3 @@
+[submodule "tests/mariadb/docker/mysql"]
+	path = tests/mariadb/docker/mysql
+	url = https://github.com/google/mysql.git
