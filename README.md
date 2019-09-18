@@ -26,5 +26,13 @@ kubectl apply -f manifests/portworx-storageclasses.yaml
 
 ## Install Mariadb
 ```
-helm install --name mariadb --namespace mariadb --values manifests/mariadb-values.yaml helm-charts/mariadb
+helm install --name mariadb --namespace mariadb --values manifests/mariadb-values.yaml helm-charts/mariadb --set rootUser.password=ROOT_PASSWORD --set replication.password=REPLICATION_PASSWORD
+```
+
+```
+$ kubectl run my-release-mariadb-client --rm --tty -i --image docker.io/bitnami/mariadb:10.2.14 --namespace default --command -- bash
+$ mysql -h my-release-mariadb.default.svc.cluster.local -uroot -p
+Enter password:
+MariaDB [none]> SHOW SLAVE HOSTS\G
+MariaDB [none]> SHOW PROCESSLIST\G
 ```
